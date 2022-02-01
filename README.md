@@ -5,7 +5,7 @@
 
 <br>
 <p align="center">
-  <img src="definition.png?raw=true" alt="Distribución Normal Tensorial." title="Distribución Normal Tensorial." width="100%">
+  <img src="definition.PNG?raw=true" alt="Distribución Normal Tensorial." title="Distribución Normal Tensorial." width="100%">
 </p>
 
 # Origen 
