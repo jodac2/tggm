@@ -1,4 +1,6 @@
+from cmath import exp
 from logging import raiseExceptions
+from unittest import expectedFailure
 import numpy as np
 import tensorly as tl
 from tggm.utils.utils import to_list
@@ -65,13 +67,32 @@ def random_tnorm(size=1, mu=None, sigma=None, shape=None, seed=None, stack=False
         else tensor d1 x ... x dp x size
     """
     
+    if sigma is None and mu is None and shape is None:
+        raise Exception("Any of sigma, mu or shape should be not None")
+    
+    if size < 1:
+        raise Exception("Sample size should be > 0")
+    
+    if sigma is not None and mu is not None:
+        
+        shape = [si.shape[0] for si in sigma]
+        if shape != list(mu.shape):
+            raise Exception("Shape of sigma and mu should be equal")
+        
+    elif sigma is None and mu is not None:
+        
+        shape = list(mu.shape)
+
+    else:
+
+        if type(shape) is not list:
+            raise Exception("Type of shape should be list")
+    
     np.random.seed(seed)
     
     # Get A such S=AA'
     if sigma is not None:
-        
         A = [np.linalg.cholesky(si) for si in sigma]
-        shape = [Ai.shape[0] for Ai in A]
     
     # x ~ N(0, 1)
     vnorm = np.random\
