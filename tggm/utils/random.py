@@ -79,6 +79,10 @@ def random_tnorm(size=1, mu=None, sigma=None, shape=None, seed=None, stack=False
         if shape != list(mu.shape):
             raise Exception("Shape of sigma and mu should be equal")
         
+    elif sigma is not None and mu is None:
+        
+        shape = [si.shape[0] for si in sigma]
+
     elif sigma is None and mu is not None:
         
         shape = list(mu.shape)
